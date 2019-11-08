@@ -6,7 +6,7 @@ function validate_address($address) {
   if (strlen($address) != 97) {
     return false;
   }
-  if (substr($address, 0, 2) != "bT") {
+  if (substr($address, 0, 2) != "TA") {
     return false;
   }
   for ($i = 2; $i < 97; $i++) {

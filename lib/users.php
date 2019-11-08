@@ -39,40 +39,40 @@ function log_in($spendKey, $authCode) {
 
 function send_auth_email($email, $authCode) {
   global $walletEmail;
-  $msg = "You have asked for a registration on Bittorium webwallet using e-mail address ".$email.".\nTo finish registration, enter authentication code ".$authCode." in the registration page.\n";
-  $result = mail($email, "Registration for Bittorium webwallet", $msg, "From: " . $walletEmail, "-f" . $walletEmail);
+  $msg = "You have asked for a registration on Talleo webwallet using e-mail address ".$email.".\nTo finish registration, enter authentication code ".$authCode." in the registration page.\n";
+  $result = mail($email, "Registration for Talleo webwallet", $msg, "From: " . $walletEmail, "-f" . $walletEmail);
 //  echo "Sent e-mail from ", $walletEmail, " to ", $email, " with authentication code ", $authCode, "<br>";
 }
 
 function send_login_email($email, $authCode) {
   global $walletEmail;
-  $msg = "You have tried logging in on Bittorium webwallet using e-mail address ".$email.".\nTo finish logging in, enter authentication code ".$authCode." in the login page.\n";
-  $result = mail($email, "Login for Bittorium webwallet", $msg, "From: " . $walletEmail, "-f" . $walletEmail);
+  $msg = "You have tried logging in on Talleo webwallet using e-mail address ".$email.".\nTo finish logging in, enter authentication code ".$authCode." in the login page.\n";
+  $result = mail($email, "Login for Talleo webwallet", $msg, "From: " . $walletEmail, "-f" . $walletEmail);
 //  echo "Sent e-mail from ", $walletEmail, " to ", $email, " with authentication code ", $authCode, "<br>";
 }
 
 function send_key_email($email, $spendKey) {
   global $walletEmail;
-  $msg = "You have registered on Bittorium webwallet using e-mail address ".$email.". To login, use key ".$spendKey." and one-time authentication code will be e-mailed to you.";
-  $result = mail($email, "Registration for Bittorium webwallet", $msg, "From: " . $walletEmail, "-f" . $walletEmail);
+  $msg = "You have registered on Talleo webwallet using e-mail address ".$email.". To login, use key ".$spendKey." and one-time authentication code will be e-mailed to you.";
+  $result = mail($email, "Registration for Talleo webwallet", $msg, "From: " . $walletEmail, "-f" . $walletEmail);
 }
 
 function send_change_email_old($email, $authCode) {
   global $walletEmail;
-  $msg = "You have requested change of e-mail address on Bittorium webwallet. To proceed with change, enter authentication code ".$authCode." in the e-mail verification page.";
-  $result = mail($email, "Change of e-mail address for Bittorium webwallet", $msg, "From: ". $walletEmail, "-f" . $walletEmail);
+  $msg = "You have requested change of e-mail address on Talleo webwallet. To proceed with change, enter authentication code ".$authCode." in the e-mail verification page.";
+  $result = mail($email, "Change of e-mail address for Talleo webwallet", $msg, "From: ". $walletEmail, "-f" . $walletEmail);
 }
 
 function send_change_email_new($oldEmail, $newEmail, $authCode) {
   global $walletEmail;
-  $msg = "You have requested change of e-mail address on Bittorium webwallet from " . $oldEmail . " to " . $newEmail . ". To confirm, enter authentication code " . $authCode . " in the e-mail verification page.";
-  $result = mail($newEmail, "Change of e-mail address for Bittorium webwallet", $msg, "From: ". $walletEmail, "-f" . $walletEmail);
+  $msg = "You have requested change of e-mail address on Talleo webwallet from " . $oldEmail . " to " . $newEmail . ". To confirm, enter authentication code " . $authCode . " in the e-mail verification page.";
+  $result = mail($newEmail, "Change of e-mail address for Talleo webwallet", $msg, "From: ". $walletEmail, "-f" . $walletEmail);
 }
 
 function send_transfer_email($email, $authCode, $address, $amount, $paymentID) {
   global $walletEmail;
-  $msg = "You have requested transfer of " . number_format($amount, 2) . "BTOR using payment ID '" . $paymentID . "' to wallet address " . $address .". To confirm, enter authentication code " . $authCode . " in the transfer verification page.";
-  $result = mail($email, "Transfer using Bittorium webwallet", $msg, "From: ". $walletEmail, "-f" . $walletEmail);
+  $msg = "You have requested transfer of " . number_format($amount, 2) . "TLO using payment ID '" . $paymentID . "' to wallet address " . $address .". To confirm, enter authentication code " . $authCode . " in the transfer verification page.";
+  $result = mail($email, "Transfer using Talleo webwallet", $msg, "From: ". $walletEmail, "-f" . $walletEmail);
 }
 
 //echo "Leaving lib/users.php...<br>";

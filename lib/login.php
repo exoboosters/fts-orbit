@@ -89,7 +89,7 @@ if (isset($_POST['email'])) {
 }
 // Not logged in
 if (!logged_in() && !isset($_POST['spendKey'])) {
-  echo "Please log in to access Bittorium web wallet!<br><br>";
+  echo "Please log in to access Talleo web wallet!<br><br>";
   echo "<form action='index.php' method='post'>";
   echo "Wallet key: <input type='text' maxlength=64 name='spendKey' pattern='[0-9a-f]{64}' required size='64'><br>";
   echo "<input type='submit' name='submit' class='btn' value='Log in'><br>";

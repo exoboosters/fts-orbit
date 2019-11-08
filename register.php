@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Bittorium webwallet</title>
+<title>Talleo webwallet</title>
 <link rel="shortcut icon" href="images/logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 <link rel="stylesheet" href="style.css">
@@ -8,7 +8,7 @@
 <body>
 <div class="header">
         <div class="logo"><img src="/images/logo.png"></div>
-        <div class="pagetitle">Bittorium Web Wallet</div>
+        <div class="pagetitle">Talleo Web Wallet</div>
 </div>
 
 <div class="page">

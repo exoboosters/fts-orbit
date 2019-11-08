@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Bittorium webwallet</title>
+<title>Talleo webwallet</title>
 <link rel="shortcut icon" href="images/logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 <link rel="stylesheet" href="style.css">
@@ -10,7 +10,7 @@
 <body>
 <div class="header">
         <div class="logo"><img src="/images/logo.png"></div>
-        <div class="pagetitle">Bittorium Web Wallet</div>
+        <div class="pagetitle">Talleo Web Wallet</div>
 </div>
 
 <div class="page">
@@ -61,7 +61,7 @@ if (logged_in()) {
     if (array_key_exists('fee_address', $getFeeAddress)) {
       $feeAddress = $getFeeAddress->fee_address;
       if (validate_address($feeAddress)) {
-        $feeAmount = min(1, max(floatval($maxAmount) / 400001, 100));
+        $feeAmount = min(1, max(floatval($maxAmount) / 40001, 100));
         $maxAmount -= $feeAmount;
       }
     }
@@ -70,10 +70,10 @@ if (logged_in()) {
       exit();
     }
     //
-    echo "<h2>Send BTOR</h2><br>";
+    echo "<h2>Send TLO</h2><br>";
     echo "<form action='send.php' method='post'>";
     echo "<table class='send'>";
-    echo "<tr><th>Recipient address:</th><td><input type='text' maxlength='97' required pattern='bT[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' name='recipient' size='97'></td>";
+    echo "<tr><th>Recipient address:</th><td><input type='text' maxlength='97' required pattern='TA[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' name='recipient' size='97'></td>";
     echo "<td rowspan='4'><span id='scan'><a class='button' onclick='scanQR(&apos;recipient&apos;);' href='javascript:return false;'>Scan QR code</a><br>Cameras: <span id='cameras'>None</span></span></td>";
     echo "<td rowspan='5'><video id='preview' style='display: none;'></video></td></tr>";
     echo "<tr><th>Amount:</th><td><input type='number' min='0.01' max='" . number_format($maxAmount / 100, 2) . "' step='0.01' name='amount' value='0.01'></td><td></td></tr>";
@@ -110,7 +110,7 @@ if (logged_in()) {
     $params = Array();
     $sourceAddresses = Array();
     $sourceAddresses[] = $address;
-    $params['sourceAddresses'] = $sourceAddresses;
+    $params['addresses'] = $sourceAddresses;
     $params['changeAddress'] = $address;
     //
     $getFeeAddress = daemonrpc_get("/feeaddress");
@@ -122,18 +122,18 @@ if (logged_in()) {
       $totalAmount += $feeAmount * 100;
     }
     if (round($totalAmount) > round($availableBalance)) {
-      echo "<span class='error'>Not enough available balance to send transaction, need ", number_format($totalAmount / 100, 2), " BTOR, have ", number_format($availableBalance / 100, 2), " BTOR.</span></div></body></html>";
+      echo "<span class='error'>Not enough available balance to send transaction, need ", number_format($totalAmount / 100, 2), " TLO, have ", number_format($availableBalance / 100, 2), " TLO.</span></div></body></html>";
       exit();
     }
     //
-    echo "Sending ", number_format($amount, 2), " BTOR";
+    echo "Sending ", number_format($amount, 2), " TLO";
     if (strlen($paymentID) > 0) {
       echo " using payment ID '", $paymentID, "'";
     }
     if ($feeAmount > 0) {
-      echo " with node fee of ", number_format($feeAmount, 2), " BTOR and network fee of 0.01 BTOR";
+      echo " with node fee of ", number_format($feeAmount, 2), " TLO and network fee of 0.01 TLO";
     } else {
-      echo " with network fee of 0.01 BTOR";
+      echo " with network fee of 0.01 TLO";
     }
     echo " from address ", $address, " to address ", $recipient, "<br>";
     //
@@ -181,7 +181,7 @@ if (logged_in()) {
       if (array_key_exists('error', $result)) {
         if (array_key_exists('message', $result->error)) {
           if ($result->error->message == 'Wrong amount') {
-            echo "<span class='error'>Sending failed because there was not enough unlocked balance, available balance ", number_format($availableBalance / 100, 2), " BTOR!</span></div></body></html>";
+            echo "<span class='error'>Sending failed because there was not enough unlocked balance, available balance ", number_format($availableBalance / 100, 2), " TLO!</span></div></body></html>";
             exit();
           } else if ($result->error->message == 'Transaction size is too big') {
             echo "<span class='error'>Sending failed because you don't have enough large inputs. Please <a href='info.php'>optimize</a> your wallet.</span></div></body></html>";

@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Bittorium webwallet</title>
+<title>Talleo webwallet</title>
 <link rel="shortcut icon" href="images/logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 <link rel="stylesheet" href="style.css">
@@ -10,7 +10,7 @@
 <body>
 <div class="header">
         <div class="logo"><img src="/images/logo.png"></div>
-        <div class="pagetitle">Bittorium Web Wallet</div>
+        <div class="pagetitle">Talleo Web Wallet</div>
 </div>
 
 <div class="page">
@@ -91,7 +91,7 @@ if (logged_in()) {
     echo "<tr><th>Name:</th><td><input type='string' name='name' minlength='1' required size='64' value=''></td>";
     echo "<td rowspan='3'><span id='scan'><a class='button' onclick='scanQR(&apos;address&apos;);' href='javascript:return false;'>Scan QR</a><br>Cameras: <span id='cameras'>None</span></span></td>";
     echo "<td rowspan='4'><video id='preview' style='display: none'></video></td></tr>";
-    echo "<tr><th>Address:</th><td><input type='string' name='address' maxlength='97' required pattern='bT[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' size='97' value=''></td></tr>";
+    echo "<tr><th>Address:</th><td><input type='string' name='address' maxlength='97' required pattern='TA[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' size='97' value=''></td></tr>";
     echo "<tr><th>Payment ID:</th><td><input type='string' name='paymentID' maxlength='64' pattern='.{0}|[0-9a-fA-F]{64}' size='64' value=''></td></tr>";
     echo "<tr><td colspan='4' class='submit'><input type='submit' class='btn' name='submit' value='Add'></td></tr></table></form>";
     echo "</div>";
@@ -141,7 +141,7 @@ if (logged_in()) {
     echo "<form action='contacts.php' method='post'>";
     echo "<input type='hidden' name='action' value='update'>";
     echo "<input type='hidden' name='name' value='".htmlspecialchars($cname)."'>";
-    echo "<tr><th>Address:</th><td><input type='string' maxlength='97' required pattern='bT[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' name='address' size='97' value='".$contact["address"]."'></td></tr>";
+    echo "<tr><th>Address:</th><td><input type='string' maxlength='97' required pattern='TA[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' name='address' size='97' value='".$contact["address"]."'></td></tr>";
     echo "<tr><th>Payment ID:</th><td><input type='string' maxlength='64' pattern='.{0}|[0-9a-fA-F]{64}' name='paymentID' size='64' value='".$contact["paymentID"]."'></td></tr>";
     echo "<tr><td colspan='2' class='submit'><input type='submit' class='btn' name='submit' value='Update'></td></tr>";
     echo "</form>";
@@ -160,12 +160,12 @@ if (logged_in()) {
     if (array_key_exists('fee_address', $getFeeAddress)) {
       $feeAddress = $getFeeAddress->fee_address;
       if (validate_address($feeAddress)) {
-        $feeAmount = min(1, max(floatval($maxAmount) / 400001, 100));
+        $feeAmount = min(1, max(floatval($maxAmount) / 40001, 100));
         $maxAmount -= $feeAmount;
       }
     }
     if ($maxAmount > 0) {
-      echo "<h3>Send BTOR to contact</h3>";
+      echo "<h3>Send TLO to contact</h3>";
       echo "<form action='send.php' method='post'>";
       echo "<input type='hidden' name='recipient' value='".$contact['address']."'>";
       echo "<input type='hidden' name='paymentID' value='".$contact['paymentID']."'>";

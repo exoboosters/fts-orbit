@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Bittorium webwallet</title>
+<title>Talleo webwallet</title>
 <link rel="shortcut icon" href="images/logo.png" >
 </head>
 <body>

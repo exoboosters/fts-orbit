@@ -55,7 +55,7 @@ if (validate_address($address)) {
   echo "<body>";
   echo "<form action='generateqr.php' method='post'>";
   echo "<table class='generate'>";
-  echo "<tr><th>Wallet address:</th><td><input type='string' name='address' maxlength='97' required pattern='bT[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' size='97' value=''></td></tr>";
+  echo "<tr><th>Wallet address:</th><td><input type='string' name='address' maxlength='97' required pattern='TA[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{95}' size='97' value=''></td></tr>";
   echo "<tr><th>Payment ID:</th><td><input type='string' name='paymentID' maxlength='64' pattern='[0123456789ABCDEFabcdef]{64}' size='64' value=''></td></tr>";
   echo "<tr><th>Amount:</th><td><input type='number' name='amount' min='0.00' step='0.01' value='0.00'></td></tr>";
   echo "<tr><td colspan='2' class='submit'><input type='submit' value='Submit' class='btn'></td></tr>";

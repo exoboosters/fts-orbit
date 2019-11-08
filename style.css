@@ -7,19 +7,19 @@ body {
 }
 
 h1 {
-  color: #0F7792;
+  color: #037B6B;
   margin-left: 40px;
 }
 
 h2 {
   font-size: 2rem;
   font-weight: 600;
-  color: #0F7792;
+  color: #037B6B;
 }
 h3 {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #0F7792;
+  color: #037B6B;
 }
 
 p {
@@ -197,7 +197,7 @@ table#transfers td:nth-of-type(2) {
 }
 
 a {
-  color: #0F7792;
+  color: #037B6B;
 }
 
 .menu a {

@@ -49,12 +49,12 @@ function scanQR(el) {
     let paymentID = "";
     let amount = 0;
     let items = "";
-    if (result.content.substr(0, 2) == "bT") {
+    if (result.content.substr(0, 2) == "TA") {
       items = result.content.split(";");
       address = items[0];
       paymentID = items[1];
       amount = items[2];
-    } else if (result.content.substr(0, 10) == "bittorium:") {
+    } else if (result.content.substr(0, 7) == "talleo:") {
       items = result.content.split(":")[1].split("?");
       address = items[0];
       for (i = 1; i < items.length; i++) {
