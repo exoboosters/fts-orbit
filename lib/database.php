@@ -137,6 +137,28 @@ function check_database() {
       return false;
     }
   }
+  $result = $db->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='faucet_wallets';");
+  $arr = $result->fetchArray();
+  if ($arr["count(*)"] == 0) {
+    echo "Creating faucet wallets table...<br>";
+    if ($db->exec("CREATE TABLE faucet_wallets (wallet TEXT, lastClaim INTEGER);")) {
+      echo "Faucet wallets table created...<br>";
+    } else {
+      echo "Creating faucet wallets table failed.<br>";
+      return false;
+    }
+  }
+  $result = $db->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='faucet_ips';");
+  $arr = $result->fetchArray();
+  if ($arr["count(*)"] == 0) {
+    echo "Creating faucet IPs table...<br>";
+    if ($db->exec("CREATE TABLE faucet_ips (ip TEXT, lastClaim INTEGER);")) {
+      echo "Faucet IPs table created...<br>";
+    } else {
+      echo "Creating faucet IPs table failed.<br>";
+      return false;
+    }
+  }
   return true;
 }
 
@@ -220,6 +242,48 @@ function get_contacts($spendKey) {
     $contacts[] = $arr;
   }
   return $contacts;
+}
+
+function faucet_check_wallet($address) {
+  global $db;
+  $result = $db->query("SELECT lastClaim FROM faucet_wallets WHERE wallet = '" . $address . "';");
+  if ($result->numColumns() == 0) {
+    return 0;
+  }
+  $arr = $result->fetchArray();
+  return $arr['lastClaim'];
+}
+
+function faucet_update_wallet($address) {
+  global $db;
+  if (faucet_check_wallet($address) == 0) {
+    $result = $db->query("INSERT INTO faucet_wallets (wallet, lastClaim) VALUES ('" . $address . "', " . time() . ");");
+    return $result;
+  } else {
+    $result = $db->query("UPDATE faucet_wallets SET lastClaim = " . time() . " WHERE wallet = '" . $address . "';");
+    return $result;
+  }
+}
+
+function faucet_check_ip($ip) {
+  global $db;
+  $result = $db->query("SELECT lastClaim FROM faucet_ips WHERE ip = '" . $ip . "';");
+  if ($result->numColumns() == 0) {
+    return 0;
+  }
+  $arr = $result->fetchArray();
+  return $arr['lastClaim'];
+}
+
+function faucet_update_ip($ip) {
+  global $db;
+  if (faucet_check_ip($ip) == 0) {
+    $result = $db->query("INSERT INTO faucet_ips (ip, lastClaim) VALUES ('" . $ip . "', " . time() . ");");
+    return $result;
+  } else {
+    $result = $db->query("UPDATE faucet_ips SET lastClaim = " . time() . " WHERE ip = '" . $ip . "';");
+    return $result;
+  }
 }
 //echo "Leaving lib/database.php<br>";
 ?>
