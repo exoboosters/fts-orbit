@@ -102,9 +102,9 @@ if (logged_in()) {
   } else {
     $addresses = Array();
     $addresses[0] = $address;
-    $txs_params = Array("addresses" => $addresses, "firstBlockIndex" => 0, "blockCount" => $height);
-    $txs = walletrpc_post("getTransactions", $txs_params);
-    $blocks = $txs->items;
+    $txhashes_params = Array("addresses" => $addresses, "firstBlockIndex" => 0, "blockCount" => $height);
+    $txhashes = walletrpc_post("getTransactionHashes", $txhashes_params);
+    $blocks = $txhashes->items;
     echo "<h2>Transactions</h2>";
     echo "<div class='hscroll'>";
     echo "<table id='transactions'>";
@@ -117,9 +117,12 @@ if (logged_in()) {
     // List transactions in reverse order, from newest to oldest
     for ($i = count($blocks) - 1; $i >= 0; $i--) {
       $block = $blocks[$i];
-      $transactions = $block->transactions;
-      for ($j = count($transactions) - 1; $j >= 0; $j--) {
-        $transaction = $transactions[$j];
+      $transactionHashes = $block->transactionHashes;
+      for ($j = count($transactionHashes) - 1; $j >= 0; $j--) {
+        $transactionHash = $transactionHashes[$j];
+        $tx_params = Array("transactionHash" => $transactionHash);
+        $tx = walletrpc_post("getTransaction", $tx_params);
+        $transaction = $tx->transaction;
         if ($transaction->amount != 0) {
           if ($ntrans >= $skip && $ntrans < $skip + 20) {
             echo "<tr>";
