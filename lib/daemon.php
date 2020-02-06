@@ -50,7 +50,7 @@ function walletrpc_post($method, $params = NULL) {
 
   curl_close($curl);
   $response = json_decode($response);
-  if (array_key_exists('result', $response)) {
+  if ($response && array_key_exists('result', $response)) {
     return $response->result;
   } else {
     return $response;

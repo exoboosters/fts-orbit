@@ -122,18 +122,20 @@ if (logged_in()) {
         $transactionHash = $transactionHashes[$j];
         $tx_params = Array("transactionHash" => $transactionHash);
         $tx = walletrpc_post("getTransaction", $tx_params);
-        $transaction = $tx->transaction;
-        if ($transaction->amount != 0) {
-          if ($ntrans >= $skip && $ntrans < $skip + 20) {
-            echo "<tr>";
-            echo "<td>" . $WalletTransactionState[$transaction->state] . "</td>";
-            echo "<td><a href='?hash=" . $transaction->transactionHash . "'>" . $transaction->transactionHash . "</a></td>";
-            echo "<td>" . date("D, d M y H:i:s", $transaction->timestamp) . "</td>";
-            echo "<td>" . number_format(get_amount($address, $transaction->transactionHash) / 100, 2) . "</td>";
-            echo "<td>" . $transaction->paymentId . "</td>";
-            echo "</tr>";
+        if ($tx) {
+          $transaction = $tx->transaction;
+          if ($transaction->amount != 0) {
+            if ($ntrans >= $skip && $ntrans < $skip + 20) {
+              echo "<tr>";
+              echo "<td>" . $WalletTransactionState[$transaction->state] . "</td>";
+              echo "<td><a href='?hash=" . $transaction->transactionHash . "'>" . $transaction->transactionHash . "</a></td>";
+              echo "<td>" . date("D, d M y H:i:s", $transaction->timestamp) . "</td>";
+              echo "<td>" . number_format(get_amount($address, $transaction->transactionHash) / 100, 2) . "</td>";
+              echo "<td>" . $transaction->paymentId . "</td>";
+              echo "</tr>";
+            }
+            $ntrans++;
           }
-          $ntrans++;
         }
       }
     }
