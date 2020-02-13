@@ -71,7 +71,7 @@ function send_change_email_new($oldEmail, $newEmail, $authCode) {
 
 function send_transfer_email($email, $authCode, $address, $amount, $paymentID) {
   global $walletEmail;
-  $msg = "You have requested transfer of " . number_format($amount, 2) . "TLO using payment ID '" . $paymentID . "' to wallet address " . $address .". To confirm, enter authentication code " . $authCode . " in the transfer verification page.";
+  $msg = "You have requested transfer of " . number_format($amount, 2) . " TLO using payment ID '" . $paymentID . "' to wallet address " . $address .". To confirm, enter authentication code " . $authCode . " in the transfer verification page.";
   $result = mail($email, "Transfer using Talleo webwallet", $msg, "From: ". $walletEmail, "-f" . $walletEmail);
 }
 
