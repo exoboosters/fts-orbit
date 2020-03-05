@@ -57,6 +57,35 @@ function walletrpc_post($method, $params = NULL) {
   }
 }
 
+function callback_post($url, $params) {
+  $fields = http_build_query($params);
+
+  $curl = curl_init();
+
+  if (!validate_url($url)) {
+    return false;
+  }
+
+  curl_setopt_array($curl, array(
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => $fields,
+    CURLOPT_HTTPHEADER => array(
+      "cache-control: no-cache\ncontent-type: application/x-www-form-urlencoded"
+    )
+  ));
+
+  $response = curl_exec($curl);
+  $err = curl_error($curl);
+
+  curl_close($curl);
+  parse_str($response, $result);
+  return $result;
+}
+
 function get_amount($address, $hash) {
   $total = 0;
   $params = Array();

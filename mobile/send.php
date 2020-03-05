@@ -146,6 +146,9 @@ if (logged_in()) {
       echo "<input type='hidden' name='amount' value='" . $amount . "'>";
       echo "<input type='hidden' name='anonymity' value='" . $anonymity . "'>";
       echo "<input type='hidden' name='paymentID' value='" . $paymentID . "'>";
+      if (isset($_POST['callback'])) {
+        echo "<input type='hidden' name='callback' value='" . htmlentities($_POST['callback'], ENT_QUOTES | ENT_HTML401) . "'>";
+      }
       echo "<table>";
       echo "<tr><th>Enter authentication code:</th><td><input type='number' pattern='[0-9]{6}' name='authCode' placeholder='000000' required size='6'></td></tr>";
       echo "<tr><td colspan=2 class='submit'><input type='submit' class='btn' name='send' value='Send'></td></tr>";
@@ -198,6 +201,9 @@ if (logged_in()) {
       if (array_key_exists('transactionHash', $result)) {
         echo "Transaction sent with hash ", $result->transactionHash, "<br>";
         echo "<a href='send.php'>Return to webwallet</a><br>";
+        if (isset($_POST['callback'])) {
+           callback_post($_POST['callback'], [ 'address' => $recipient, 'paymentId' => $paymentID, 'transactionHash' => $result->transactionHash ]);
+        }
       }
     }
   }

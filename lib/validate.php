@@ -125,5 +125,18 @@ function validate_contact_name($name) {
   }
   return true;
 }
+
+function validate_url($url) {
+  if (!filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)) {
+    return false;
+  }
+  if (substr($url, 0, 7) == 'http://') {
+    return true;
+  }
+  if (substr($url, 0, 8) == 'https://') {
+    return true;
+  }
+  return false;
+}
 //echo "Leaving lib/validate.php...<br>";
 ?>
